@@ -17,9 +17,9 @@ class GFPGANFaceAugment:
         self.net_input_name = self.ort_session.get_inputs()[0].name
         _,self.net_input_channels,self.net_input_height,self.net_input_width = self.ort_session.get_inputs()[0].shape
         self.net_output_count = len(self.ort_session.get_outputs())
-        self.face_size = 512
+        self.face_size = 256
         self.face_template = np.array([[192, 240], [319, 240], [257, 371]]) * (self.face_size / 512.0)
-        self.upscale_factor = 4
+        self.upscale_factor = 2
         self.affine = True
         self.affine_matrix = None
     def pre_process(self, img):
