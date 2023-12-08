@@ -20,7 +20,7 @@ class GFPGANFaceAugment:
         self.face_size = 512
         self.face_template = np.array([[192, 240], [319, 240], [257, 371]]) * (self.face_size / 512.0)
         self.upscale_factor = 2
-        self.affine = False
+        self.affine = True
         self.affine_matrix = None
     def pre_process(self, img):
         img = cv2.resize(img, (int(img.shape[1] / 2), int(img.shape[0] / 2)))
