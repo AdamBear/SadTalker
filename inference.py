@@ -8,7 +8,8 @@ import platform
 
 from src.utils.preprocess import CropAndExtract
 from src.test_audio2coeff import Audio2Coeff  
-from src.facerender.animate import AnimateFromCoeff
+#from src.facerender.animate import AnimateFromCoeff
+from src.facerender.animate_onnx import AnimateFromCoeff
 from src.facerender.pirender_animate import AnimateFromCoeff_PIRender
 from src.generate_batch import get_data
 from src.generate_facerender_batch import get_facerender_data
