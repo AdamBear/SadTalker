@@ -69,7 +69,7 @@ def sadtalker_demo(checkpoint_path='checkpoints', config_path='src/config', warp
 
                             with gr.Column():
                                 use_ref_video = gr.Checkbox(label="Use Reference Video")
-                                ref_info = gr.Radio(['pose', 'blink','pose+blink', 'all'], value='pose', label='Reference Video',info="How to borrow from reference Video?((fully transfer, aka, video driving mode))")
+                                ref_info = gr.Radio(['pose', 'blink','pose+blink', 'all'], value='all', label='Reference Video',info="How to borrow from reference Video?((fully transfer, aka, video driving mode))")
 
                             ref_video.change(ref_video_fn, inputs=ref_video, outputs=[use_ref_video]) # todo
 
@@ -87,16 +87,16 @@ def sadtalker_demo(checkpoint_path='checkpoints', config_path='src/config', warp
                                 blink_every = gr.Checkbox(label="use eye blink", value=True)
 
                             with gr.Row():
-                                size_of_image = gr.Radio([256, 512], value=256, label='face model resolution', info="use 256/512 model?") # 
-                                preprocess_type = gr.Radio(['crop', 'resize','full', 'extcrop', 'extfull'], value='crop', label='preprocess', info="How to handle input image?")
+                                size_of_image = gr.Radio([256, 512], value=256, label='face model resolution', info="use 256/512 model?") #
+                                preprocess_type = gr.Radio(['crop', 'resize','full', 'extcrop', 'extfull'], value='resize', label='preprocess', info="How to handle input image?")
                             
                             with gr.Row():
                                 is_still_mode = gr.Checkbox(label="Still Mode (fewer head motion, works with preprocess `full`)")
-                                facerender = gr.Radio(['facevid2vid','pirender'], value='facevid2vid', label='facerender', info="which face render?")
+                                facerender = gr.Radio(['facevid2vid','pirender'], value='pirender', label='facerender', info="which face render?")
                                 
                             with gr.Row():
                                 batch_size = gr.Slider(label="batch size in generation", step=1, maximum=10, value=1)
-                                enhancer = gr.Checkbox(label="GFPGAN as Face enhancer")
+                                enhancer = gr.Checkbox(label="GFPGAN as Face enhancer", value=True)
                             
                             submit = gr.Button('Generate', elem_id="sadtalker_generate", variant='primary')
                             
