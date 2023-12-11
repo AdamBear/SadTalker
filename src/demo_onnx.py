@@ -82,9 +82,9 @@ class GFPGANFaceAugment:
         
 if __name__ == "__main__":
     parser = argparse.ArgumentParser("onnxruntime demo")
-    parser.add_argument('--model_path', type=str, default=None, help='model path')
-    parser.add_argument('--image_path', type=str, default=None, help='input image path')
-    parser.add_argument('--save_path', type=str, default="output.jpg", help='output image path')
+    parser.add_argument('--model_path', type=str, default="/data/SadTalker/checkpoints/gfpgan/weights/GFPGANv1.4.onnx", help='model path')
+    parser.add_argument('--image_path', type=str, default="/data/zlj_256.png", help='input image path')
+    parser.add_argument('--save_path', type=str, default="/data/output.jpg", help='output image path')
     args = parser.parse_args()
 
     faceaugment = GFPGANFaceAugment(model_path=args.model_path)

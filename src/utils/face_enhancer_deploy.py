@@ -69,7 +69,7 @@ def enhancer_generator_no_len(images, method='gfpgan', bg_upsampler='realesrgan'
     #     arch=arch,
     #     channel_multiplier=channel_multiplier,
     #     bg_upsampler=bg_upsampler)
-    restorer = GFPGANFaceAugment(model_path=model_path,use_gpu=True)
+    restorer = GFPGANFaceAugment(model_path=model_path, use_gpu=True)
 
     # ------------------------ restore ------------------------
     for idx in tqdm(range(len(images)), 'Face Enhancer:'):
