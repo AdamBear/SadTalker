@@ -10,15 +10,14 @@ def init_path(checkpoint_dir, config_dir, size=512, old_version=False, preproces
                 'audio2pose_checkpoint' : os.path.join(checkpoint_dir, 'auido2pose_00140-model.pth'),
                 'audio2exp_checkpoint' : os.path.join(checkpoint_dir, 'auido2exp_00300-model.pth'),
                 'free_view_checkpoint' : os.path.join(checkpoint_dir, 'facevid2vid_00189-model.pth.tar'),
-                'path_of_net_recon_model' : os.path.join(checkpoint_dir, 'epoch_20.pth'),
-                'crop': os.path.join(checkpoint_dir, 'gfpgan'),
+                'path_of_net_recon_model' : os.path.join(checkpoint_dir, 'epoch_20.pth')
         }
 
         use_safetensor = False
     elif len(glob.glob(os.path.join(checkpoint_dir, '*.safetensors'))):
         print('using safetensor as default')
         sadtalker_paths = {
-            "checkpoint":os.path.join(checkpoint_dir, 'SadTalker_V0.0.2_'+str(size)+'.safetensors'),
+            "checkpoint":os.path.join(checkpoint_dir, 'SadTalker_V0.0.2_'+str(size)+'.safetensors')
             }
         use_safetensor = True
     else:
@@ -39,6 +38,7 @@ def init_path(checkpoint_dir, config_dir, size=512, old_version=False, preproces
     sadtalker_paths['pirender_yaml_path'] = os.path.join(config_dir, 'facerender_pirender.yaml')
     sadtalker_paths['pirender_checkpoint'] =  os.path.join(checkpoint_dir, 'epoch_00190_iteration_000400000_checkpoint.pt')
     sadtalker_paths['use_safetensor'] =  use_safetensor # os.path.join(config_dir, 'auido2exp.yaml')
+    sadtalker_paths['crop'] = os.path.join(checkpoint_dir, 'gfpgan')
 
     if 'full' in preprocess:
         sadtalker_paths['mappingnet_checkpoint'] = os.path.join(checkpoint_dir, 'mapping_00109-model.pth.tar')
