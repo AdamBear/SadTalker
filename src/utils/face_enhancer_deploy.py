@@ -82,6 +82,7 @@ def enhancer_generator_no_len(images, method='gfpgan', bg_upsampler='realesrgan'
         #     has_aligned=False,
         #     only_center_face=False,
         #     paste_back=True)
+        img = cv2.resize(img, (512, 512))
         r_img, _ = restorer.forward(img)
         
         r_img = cv2.cvtColor(r_img, cv2.COLOR_BGR2RGB)
