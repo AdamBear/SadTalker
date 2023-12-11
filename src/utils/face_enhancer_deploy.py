@@ -61,7 +61,7 @@ def enhancer_generator_no_len(images, method='gfpgan', bg_upsampler='realesrgan'
     bg_upsampler = None
 
     # determine model paths
-    model_path = '/data/SadTalker/gfpgan/weights/GFPGANv1.4.onnx'
+    model_path = '/data/SadTalker/checkpoints/gfpgan/weights/GFPGANv1.4.onnx'
 
     # restorer = GFPGANer(
     #     model_path=model_path,
