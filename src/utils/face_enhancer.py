@@ -23,11 +23,11 @@ class GeneratorWithLen(object):
     def __iter__(self):
         return self.gen
 
-def enhancer_list(images, method='gfpgan', bg_upsampler='realesrgan', root_path="./"):
-    gen = enhancer_generator_no_len(images, method=method, bg_upsampler=bg_upsampler, root_path=root_path)
+def enhancer_list(images, method='gfpgan', bg_upsampler='realesrgan'):
+    gen = enhancer_generator_no_len(images, method=method, bg_upsampler=bg_upsampler)
     return list(gen)
 
-def enhancer_generator_with_len(images, method='gfpgan', bg_upsampler='realesrgan', root_path="./"):
+def enhancer_generator_with_len(images, method='gfpgan', bg_upsampler='realesrgan'):
     """ Provide a generator with a __len__ method so that it can passed to functions that
     call len()"""
 
@@ -35,11 +35,11 @@ def enhancer_generator_with_len(images, method='gfpgan', bg_upsampler='realesrga
         # TODO: Create a generator version of load_video_to_cv2
         images = load_video_to_cv2(images)
 
-    gen = enhancer_generator_no_len(images, method=method, bg_upsampler=bg_upsampler, root_path=root_path)
+    gen = enhancer_generator_no_len(images, method=method, bg_upsampler=bg_upsampler)
     gen_with_len = GeneratorWithLen(gen, len(images))
     return gen_with_len
 
-def enhancer_generator_no_len(images, method='gfpgan', bg_upsampler='realesrgan', root_path="./"):
+def enhancer_generator_no_len(images, method='gfpgan', bg_upsampler='realesrgan'):
     """ Provide a generator function so that all of the enhanced images don't need
     to be stored in memory at the same time. This can save tons of RAM compared to
     the enhancer function. """

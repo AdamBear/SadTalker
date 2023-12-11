@@ -80,7 +80,6 @@ class AnimateFromCoeff():
         self.generator.eval()
         self.he_estimator.eval()
         self.mapping.eval()
-        self.enhance_model_root = sadtalker_path["corp"]
         self.device = device
     
     def load_cpk_facevid2vid_safetensor(self, checkpoint_path, generator=None, 
@@ -241,8 +240,7 @@ class AnimateFromCoeff():
 
             try:
                 enhanced_images_gen_with_len = enhancer_generator_with_len(full_video_path, method=enhancer,
-                                                                           bg_upsampler=background_enhancer,
-                                                                           root_path=self.enhance_model_root)
+                                                             bg_upsampler=background_enhancer)
                 imageio.mimsave(enhanced_path, enhanced_images_gen_with_len, fps=float(25))
             except:
                 enhanced_images_gen_with_len = enhancer_list(full_video_path, method=enhancer,
