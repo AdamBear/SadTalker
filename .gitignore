@@ -160,7 +160,7 @@ cython_debug/
 .idea/
 
 examples/results/*
-gfpgan/*
+checkpoints/gfpgan/*
 checkpoints/*
 assets/*
 results/*

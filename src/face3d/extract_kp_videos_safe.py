@@ -32,15 +32,16 @@ def init_alignment_model(model_name, half=False, device='cuda', model_rootpath=N
 
 
 class KeypointExtractor():
-    def __init__(self, device='cuda'):
+
+    def __init__(self, device='cuda', root_path="./"):
 
         ### gfpgan/weights
         try:
             import webui  # in webui
-            root_path = 'extensions/SadTalker/gfpgan/weights' 
+            root_path = os.path.join(root_path, 'extensions/SadTalker/gfpgan/weights')
 
         except:
-            root_path = 'gfpgan/weights'
+            root_path = os.path.join(root_path, 'gfpgan/weights')
 
         self.detector = init_alignment_model('awing_fan',device=device, model_rootpath=root_path)   
         self.det_net = init_detection_model('retinaface_resnet50', half=False,device=device, model_rootpath=root_path)

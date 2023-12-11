@@ -16,6 +16,17 @@ from src.generate_facerender_batch import get_facerender_data
 from src.utils.init_path import init_path
 
 def main(args):
+    """
+    如果ref_eyeblink不为空，则提取眨眼动作的关键帧并保存到ref_eyeblink_frame_dir目录下。然后使用预处理模型对眨眼动作进行3DMM提取，得到关键点文件路径ref_eyeblink_coeff_path。
+    如果ref_pose不为空，且与ref_eyeblink不相等，则提取姿势的关键帧并保存到ref_pose_frame_dir目录下。然后使用预处理模型对姿势进行3DMM提取，得到关键点文件路径ref_pose_coeff_path。
+    使用get_data函数获取输入数据，包括眼睛关键点、音频数据等。
+    将音频数据转换为关键点数据，得到coeff_path。
+    如果设置了face3dvis,则使用gen_composed_video函数生成包含3D人脸渲染的视频。
+    使用get_facerender_data函数获取面部渲染所需的数据。
+    使用animate_from_coeff.generate函数根据关键点数据生成动画，并将结果保存到save_dir+'.mp4'。
+    :param args:
+    :return:
+    """
     #torch.backends.cudnn.enabled = False
 
     pic_path = args.source_image

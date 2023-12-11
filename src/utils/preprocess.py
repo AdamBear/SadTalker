@@ -46,7 +46,7 @@ def split_coeff(coeffs):
 class CropAndExtract():
     def __init__(self, sadtalker_path, device):
 
-        self.propress = Preprocesser(device)
+        self.propress = Preprocesser(device, sadtalker_path['crop'])
         self.net_recon = networks.define_net_recon(net_recon='resnet50', use_last_fc=False, init_path='').to(device)
         
         if sadtalker_path['use_safetensor']:

@@ -50,7 +50,7 @@ class SadTalker():
 
         self.sadtalker_paths = init_path(self.checkpoint_path, self.config_path, size, False, preprocess)
         print(self.sadtalker_paths)
-            
+
         self.audio_to_coeff = Audio2Coeff(self.sadtalker_paths, self.device)
         self.preprocess_model = CropAndExtract(self.sadtalker_paths, self.device)
         
@@ -99,7 +99,7 @@ class SadTalker():
             print('new audiopath:',audio_path)
             # if ref_video contains audio, set the audio from ref_video.
             cmd = r"ffmpeg -y -hide_banner -loglevel error -i %s %s"%(ref_video, audio_path)
-            os.system(cmd)        
+            os.system(cmd)
 
         os.makedirs(save_dir, exist_ok=True)
         
