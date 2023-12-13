@@ -39,7 +39,7 @@ def enhancer_generator_with_len(images, method='gfpgan', bg_upsampler='realesrga
     gen_with_len = GeneratorWithLen(gen, len(images))
     return gen_with_len
 
-def enhancer_generator_no_len(images, method='gfpgan', bg_upsampler='realesrgan'):
+def enhancer_generator_no_len(images, method='gfpgan', bg_upsampler='realesrgan', upscale=2):
     """ Provide a generator function so that all of the enhanced images don't need
     to be stored in memory at the same time. This can save tons of RAM compared to
     the enhancer function. """
@@ -102,7 +102,7 @@ def enhancer_generator_no_len(images, method='gfpgan', bg_upsampler='realesrgan'
 
     restorer = GFPGANer(
         model_path=model_path,
-        upscale=2,
+        upscale=upscale,
         arch=arch,
         channel_multiplier=channel_multiplier,
         bg_upsampler=bg_upsampler)
