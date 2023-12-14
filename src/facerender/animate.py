@@ -179,6 +179,7 @@ class AnimateFromCoeff():
 
         frame_num = x['frame_num']
 
+        # todo: 从这里入手将其跳帧和并行化
         predictions_video = make_animation(source_image, source_semantics, target_semantics,
                                         self.generator, self.kp_extractor, self.he_estimator, self.mapping, 
                                         yaw_c_seq, pitch_c_seq, roll_c_seq, use_exp = True)

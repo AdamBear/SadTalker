@@ -123,7 +123,7 @@ def make_animation(source_image, source_semantics, target_semantics,
                 he_driving['roll_in'] = roll_c_seq[:, frame_idx] 
             
             kp_driving = keypoint_transformation(kp_canonical, he_driving)
-                
+
             kp_norm = kp_driving
             out = generator(source_image, kp_source=kp_source, kp_driving=kp_norm)
             '''
