@@ -8,21 +8,40 @@ from PIL import Image
 import torch
 from tqdm import tqdm
 from itertools import cycle
-from facexlib.alignment import init_alignment_model, landmark_98_to_68
-from facexlib.detection import init_detection_model
 from torch.multiprocessing import Pool, Process, set_start_method
+
+from facexlib.alignment import landmark_98_to_68
+from facexlib.detection import init_detection_model
+
+from facexlib.utils import load_file_from_url
+from facexlib.alignment.awing_arch import FAN
+
+def init_alignment_model(model_name, half=False, device='cuda', model_rootpath=None):
+    if model_name == 'awing_fan':
+        model = FAN(num_modules=4, num_landmarks=98, device=device)
+        model_url = 'https://github.com/xinntao/facexlib/releases/download/v0.1.0/alignment_WFLW_4HG.pth'
+    else:
+        raise NotImplementedError(f'{model_name} is not implemented.')
+
+    model_path = load_file_from_url(
+        url=model_url, model_dir='facexlib/weights', progress=True, file_name=None, save_dir=model_rootpath)
+    model.load_state_dict(torch.load(model_path, map_location=device)['state_dict'], strict=True)
+    model.eval()
+    model = model.to(device)
+    return model
 
 
 class KeypointExtractor():
-    def __init__(self, device='cuda'):
+
+    def __init__(self, device='cuda', root_path="./"):
 
         ### gfpgan/weights
-        try:
-            import webui  # in webui
-            root_path = 'extensions/SadTalker/gfpgan/weights' 
-
-        except:
-            root_path = 'gfpgan/weights'
+        # try:
+        #     import webui  # in webui
+        #     root_path = os.path.join(root_path, 'extensions/SadTalker/gfpgan/weights')
+        #
+        # except:
+        #     root_path = os.path.join(root_path, 'gfpgan/weights')
 
         self.detector = init_alignment_model('awing_fan',device=device, model_rootpath=root_path)   
         self.det_net = init_detection_model('retinaface_resnet50', half=False,device=device, model_rootpath=root_path)
@@ -55,11 +74,6 @@ class KeypointExtractor():
                         bboxes = self.det_net.detect_faces(images, 0.97)
                         
                         bboxes = bboxes[0]
-
-                        # bboxes[0] -= 100
-                        # bboxes[1] -= 100
-                        # bboxes[2] += 100
-                        # bboxes[3] += 100
                         img = img[int(bboxes[1]):int(bboxes[3]), int(bboxes[0]):int(bboxes[2]), :]
 
                         keypoints = landmark_98_to_68(self.detector.get_landmarks(img)) # [0]
