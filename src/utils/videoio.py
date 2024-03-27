@@ -17,14 +17,13 @@ def load_video_to_cv2(input_path):
         full_frames.append(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
     return full_frames
 
-
 def save_video_with_watermark(video, audio, save_path, watermark=False):
     temp_file = str(uuid.uuid4())+'.mp4'
     cmd = r'ffmpeg -y -hide_banner -loglevel error -i "%s" -i "%s" -ar 44100  "%s"' % (video, audio, temp_file)
     os.system(cmd)
 
     if watermark:
-        cmd = r'ffmpeg -y -hide_banner -loglevel error -i "%s" -i /data/SadTalker/woqi_watermark.png -filter_complex "overlay=x=W-w:y=H-h" "%s"' % (temp_file, save_path)
+        cmd = r'ffmpeg -y -hide_banner -loglevel error -i "%s" -i /data/SadTalker/woqi_watermark.png -filter_complex "overlay=x=W-w:y=H-h" "%s"' % (temp_file,save_path)
         os.system(cmd)
     else:
         shutil.move(temp_file, save_path)
